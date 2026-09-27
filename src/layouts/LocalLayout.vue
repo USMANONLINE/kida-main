@@ -10,7 +10,6 @@
           </q-avatar> -->
           Kida
         </q-toolbar-title>
-        <q-btn label="New Service" outline />
       </q-toolbar>
 
       <!-- <q-tabs align="left">
@@ -24,7 +23,7 @@
       <!-- drawer content -->
     </q-drawer>
 
-    <q-page-container class="bg-grey-1">
+    <q-page-container class="bg-grey-2">
       <router-view />
     </q-page-container>
 
