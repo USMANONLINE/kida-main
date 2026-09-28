@@ -11,10 +11,10 @@
     <tbody v-for="(config, index) in props.data">
       <tr>
         <td>
-          <q-input v-model.trim="config.headerName" outlined dense />
+          <q-input v-model.trim="config.name" outlined dense />
         </td>
         <td>
-          <q-select v-model="config.valueType" outlined dense />
+          <q-select v-model="config.type" outlined dense />
         </td>
         <td>
           <q-input v-model="config.description" outlined dense />
@@ -44,12 +44,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { TableKeyPairData } from "@/types/Fields";
 
 const defaultTableKeyPairRow = {
-  headerName: "",
-  valueType: "string",
+  name: "",
+  type: "string",
   description: ""
 };
 const props = defineProps({ data: Array<TableKeyPairData> });

@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-xs">
+  <q-page class="q-pa-sm">
     <q-tabs
       v-model="requestTab"
       inline-label
@@ -13,10 +13,20 @@
 
     <div class="row q-gutter-xs q-my-xs">
       <div class="col-2">
-        <q-select :options="httpMethods" outlined dense />
+        <q-select
+          v-model="mockPayload.method"
+          :options="httpMethods"
+          outlined
+          dense
+        />
       </div>
       <div class="col-9">
-        <q-input dense outlined />
+        <q-input
+          prefix="http://localhost"
+          v-model="mockPayload.path"
+          dense
+          outlined
+        />
       </div>
       <div class="col">
         <q-btn label="Deploy" color="primary" no-caps />
@@ -48,7 +58,7 @@
 
       <q-tab-panels v-model="requestConfigTab" animated>
         <q-tab-panel name="docs">
-          <q-editor />
+          <q-editor v-model="mockPayload.docs" />
         </q-tab-panel>
 
         <q-tab-panel name="reqHeader">
@@ -114,7 +124,7 @@
 
 <script setup lang="ts">
 import KeyPairTable from "@/components/KeyPairTable.vue";
-import { TableKeyPairData } from "@/types/Fields";
+import { HttpMockReq, TableKeyPairData } from "@/types/Fields";
 import { ref } from "vue";
 
 const requestTab = ref("http");
@@ -130,8 +140,8 @@ const httpMethods = ref([
 ]);
 
 const defaultTableKeyPairRow = {
-  headerName: "",
-  valueType: "string",
+  name: "",
+  type: "string",
   description: ""
 };
 
@@ -151,5 +161,19 @@ const pathVariable = ref<Array<TableKeyPairData>>([
   Object.create(defaultTableKeyPairRow)
 ]);
 
-const mockPayload = ref();
+const defaultMockReq: HttpMockReq = {
+  title: "Untitled Request",
+  method: "GET",
+  docs: "",
+  path: "/api/",
+  queryParam: {},
+  pathVariable: {},
+  reqBody: {},
+  respBody: {},
+  reqHeader: {},
+  respHeader: {},
+  setting: {}
+};
+
+const mockPayload = ref<HttpMockReq>(defaultMockReq);
 </script>
